@@ -29,6 +29,7 @@ async function getMoviesController(
       premieres: move.premieres,
       rating: move.rating,
       ratingCount: move.ratingCount,
+      genres: move.genres,
     };
 
     const path = "./smt.json";
@@ -54,18 +55,12 @@ function file(): any {
   }
 }
 
-
- 
-
- 
-
-
 async function getData() {
   let movies: any = file();
   let num: number = 0;
   let da: any = [];
-  for (let i = 0; i <= 2452; i+=2) {
-    movies.slice(i, i+2).map(async (item: any) => {
+  for (let i = 0; i <= 2440; i += 20) {
+    movies.slice(i, i + 20).map(async (item: any) => {
       await getMoviesController(
         item.original_title,
         item.revenues,
@@ -75,8 +70,9 @@ async function getData() {
         item.currency
       );
     });
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
   }
+  console.log("done");
 }
 
 getData();
